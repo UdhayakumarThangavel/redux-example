@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import {useDispatch, useSelector} from "react-redux";
+import {changeName} from "./userSlice";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const userName = useSelector(state => state.user.name)
+    const dispatch = useDispatch()
+    function handleChange(newName){
+        dispatch(changeName({
+            name:newName
+        }))
+    }
+      return (
+        <div className="App">
+          <h1>Hii, {userName}</h1>
+            <button onClick={()=>handleChange("Udhaya")}>Change to Udhaya</button>
+            <button onClick={()=>handleChange("Brain")}>Change to Brain</button>
+        </div>
+      );
 }
 
 export default App;
